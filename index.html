@@ -3,24 +3,939 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Kishore M | PLC & Industrial Automation</title>
+
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#f6f8fb,#0b1118);--surface:light-dark(#fff,#111923);--surface2:light-dark(#eef3f7,#17222e);--text:light-dark(#17202a,#edf4f8);--muted:light-dark(#5e6b78,#aebbc7);--accent:light-dark(#075985,#38bdf8);--border:light-dark(#d8e0e8,#263544)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}.root{min-height:100vh;background:var(--bg)}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}.navin{max-width:1100px;margin:auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800;letter-spacing:.4px}.links{display:flex;gap:22px}.links a{color:var(--muted);text-decoration:none;font-size:14px}.links a:hover{color:var(--accent)}
-main{max-width:1100px;margin:auto;padding:0 24px}.hero{padding:92px 0 70px;display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:center}.eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:13px}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:14px 0 20px}.hero h1 span{color:var(--accent)}.hero p{font-size:19px;color:var(--muted);max-width:700px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{padding:12px 18px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-weight:700}.btn.primary{background:var(--accent);color:#06131c;border-color:var(--accent)}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;box-shadow:0 16px 40px color-mix(in srgb,#000 10%,transparent)}.terminal{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:14px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:7px}.terminal p{margin:11px 0;color:var(--muted)}.terminal b{color:var(--text)}
-section{padding:62px 0}.sectionhead{margin-bottom:26px}.sectionhead h2{font-size:32px;margin:0 0 7px}.sectionhead p{margin:0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px}.card h3{margin:4px 0 8px}.card p{color:var(--muted);margin:0}.tag{display:inline-block;background:var(--surface2);border:1px solid var(--border);padding:5px 9px;border-radius:999px;font-size:12px;margin:4px 4px 0 0}.project{display:flex;flex-direction:column;min-height:220px}.project .bottom{margin-top:auto;padding-top:20px}.project a{color:var(--accent);font-weight:700;text-decoration:none}.timeline{border-left:2px solid var(--border);padding-left:24px}.timeline .item{margin:0 0 28px;position:relative}.timeline .item:before{content:"";position:absolute;left:-31px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--accent)}footer{border-top:1px solid var(--border);padding:35px 24px;text-align:center;color:var(--muted)}
-@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:65px}.grid{grid-template-columns:1fr 1fr}.links{display:none}}@media(max-width:540px){.grid{grid-template-columns:1fr}main{padding:0 18px}.hero h1{font-size:48px}}
+:root{
+  color-scheme:light dark;
+  --bg:light-dark(#f6f8fb,#0b1118);
+  --surface:light-dark(#ffffff,#111923);
+  --surface2:light-dark(#eef3f7,#17222e);
+  --text:light-dark(#17202a,#edf4f8);
+  --muted:light-dark(#5e6b78,#aebbc7);
+  --accent:light-dark(#075985,#38bdf8);
+  --border:light-dark(#d8e0e8,#263544);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+.root{
+  min-height:100vh;
+  background:var(--bg);
+}
+
+/* NAVIGATION */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.navin{
+  max-width:1100px;
+  margin:auto;
+  padding:16px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.links{
+  display:flex;
+  gap:22px;
+}
+
+.links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+
+.links a:hover{
+  color:var(--accent);
+}
+
+/* MAIN */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:0 24px;
+}
+
+/* HERO */
+
+.hero{
+  padding:92px 0 70px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:50px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:var(--accent);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:13px;
+}
+
+.hero h1{
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  margin:14px 0 20px;
+}
+
+.hero h1 span{
+  color:var(--accent);
+}
+
+.hero p{
+  font-size:19px;
+  color:var(--muted);
+  max-width:700px;
+}
+
+/* BUTTONS */
+
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.btn{
+  padding:12px 18px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  display:inline-block;
+}
+
+.btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.btn.primary{
+  background:var(--accent);
+  color:#06131c;
+  border-color:var(--accent);
+}
+
+/* TERMINAL PANEL */
+
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:26px;
+  box-shadow:0 16px 40px color-mix(in srgb,#000 10%,transparent);
+}
+
+.terminal{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:14px;
+}
+
+.dot{
+  display:inline-block;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--accent);
+  margin-right:7px;
+}
+
+.terminal p{
+  margin:11px 0;
+  color:var(--muted);
+}
+
+.terminal b{
+  color:var(--text);
+}
+
+/* SECTIONS */
+
+section{
+  padding:62px 0;
+}
+
+.sectionhead{
+  margin-bottom:26px;
+}
+
+.sectionhead h2{
+  font-size:32px;
+  margin:0 0 7px;
+}
+
+.sectionhead p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+}
+
+.card h3{
+  margin:4px 0 8px;
+}
+
+.card p{
+  color:var(--muted);
+  margin:0;
+}
+
+/* TAGS */
+
+.tag{
+  display:inline-block;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  margin:4px 4px 0 0;
+}
+
+/* PROJECTS */
+
+.project{
+  display:flex;
+  flex-direction:column;
+  min-height:240px;
+}
+
+.project .bottom{
+  margin-top:auto;
+  padding-top:20px;
+}
+
+.project a{
+  color:var(--accent);
+  font-weight:700;
+  text-decoration:none;
+}
+
+.project a:hover{
+  text-decoration:underline;
+}
+
+/* TIMELINE */
+
+.timeline{
+  border-left:2px solid var(--border);
+  padding-left:24px;
+}
+
+.timeline .item{
+  margin:0 0 28px;
+  position:relative;
+}
+
+.timeline .item:before{
+  content:"";
+  position:absolute;
+  left:-31px;
+  top:8px;
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+/* ACHIEVEMENT */
+
+.achievement{
+  border-left:4px solid var(--accent);
+}
+
+/* CONTACT LINKS */
+
+.contact-link{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.contact-link:hover{
+  text-decoration:underline;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 24px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:65px;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .links{
+    display:none;
+  }
+}
+
+@media(max-width:540px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    padding:0 18px;
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+
+  .buttons{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    text-align:center;
+  }
+}
 </style>
 </head>
-<body><div class="root">
-<nav><div class="navin"><div class="brand">KISHORE M</div><div class="links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div></div></nav>
+
+<body>
+
+<div class="root">
+
+<!-- NAVIGATION -->
+
+<nav>
+  <div class="navin">
+
+    <div class="brand">
+      KISHORE M
+    </div>
+
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+
+      <!-- RESUME -->
+      <a href="resume/KISHORE_M_.pdf" target="_blank">
+        Resume
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
 <main>
-<section class="hero"><div><div class="eyebrow">PLC • Industrial Automation • ECE</div><h1>Building my career in <span>Industrial Automation.</span></h1><p>BE ECE graduate focused on PLC programming, machine automation, industrial sensors, motor control and practical troubleshooting. I build and test automation projects to strengthen real-world skills.</p><div class="buttons"><a class="btn primary" href="#projects">View Projects</a><a class="btn" href="#contact">Contact Me</a></div></div><div class="panel terminal"><p><span class="dot"></span><b>automation_profile</b></p><p>&gt; role: <b>Engineering Technician</b></p><p>&gt; focus: <b>PLC / Automation</b></p><p>&gt; platform: <b>CODESYS V3.5</b></p><p>&gt; language: <b>Ladder Diagram</b></p><p>&gt; simulation: <b>Control Win V3</b></p><p>&gt; status: <b>building portfolio...</b></p></div></section>
-<section id="about"><div class="sectionhead"><h2>About Me</h2><p>A practical portfolio built around skills I can demonstrate, not just list.</p></div><div class="panel"><p>I am an ECE graduate developing my career in PLC and industrial automation. My learning focus includes PLC logic, HMI/SCADA concepts, sensors, motors, feedback monitoring, fault handling and machine automation. I use simulation projects to practice structured control logic and document what I build.</p></div></section>
-<section id="skills"><div class="sectionhead"><h2>Technical Skills</h2><p>Core areas I am developing through industrial exposure and hands-on projects.</p></div><div class="grid"><div class="card"><h3>PLC & Control</h3><span class="tag">Ladder Diagram</span><span class="tag">CODESYS</span><span class="tag">Interlocks</span><span class="tag">Timers</span><span class="tag">Fault Latching</span></div><div class="card"><h3>Industrial</h3><span class="tag">Sensors</span><span class="tag">Motors</span><span class="tag">Feedback</span><span class="tag">Troubleshooting</span><span class="tag">Machine Automation</span></div><div class="card"><h3>Supporting Skills</h3><span class="tag">HMI / SCADA Concepts</span><span class="tag">Electrical Basics</span><span class="tag">Industrial Instrumentation</span><span class="tag">GitHub</span></div></div></section>
-<section id="projects"><div class="sectionhead"><h2>Projects</h2><p>Hands-on PLC projects tested in simulation.</p></div><div class="grid"><div class="card project"><div><span class="tag">Project 01</span><h3>Motor Control & Fault Monitoring</h3><p>Start/stop control with seal-in logic, overload permissive, motor feedback, startup failure detection, fault generation, latching, reset and restart interlock.</p></div><div class="bottom"><a href="#contact">GitHub link →</a></div></div><div class="card project"><div><span class="tag">Project 02 • In Progress</span><h3>Pump Control System</h3><p>Developing automatic/manual pump control with start/stop, low- and high-level feedback, pump feedback, fault detection and fault reset.</p></div><div class="bottom"><a href="#contact">GitHub link →</a></div></div><div class="card project"><div><span class="tag">Next</span><h3>More Automation Projects</h3><p>Future projects will expand into HMI, alarms, sequencing, sensors, drives and machine-control concepts.</p></div><div class="bottom"><a href="#contact">Coming soon →</a></div></div></div></section>
-<section id="experience"><div class="sectionhead"><h2>Experience & Education</h2><p>Concise background.</p></div><div class="timeline"><div class="item"><h3>Technician – Engineering / Automation</h3><p>Industrial manufacturing environment · Current</p><p>Exposure to machine availability, production support, automation-related troubleshooting and practical equipment issues.</p></div><div class="item"><h3>Instrumentation Trainee</h3><p>MRF · Previous</p><p>Exposure to pressure instrument calibration, weighing instrumentation, SCADA installation support and industrial instrumentation activities.</p></div><div class="item"><h3>BE Electronics & Communication Engineering</h3><p>Jeppiaar Institute of Technology, Chennai · 2021–2025</p></div></div></section>
-<section id="contact"><div class="sectionhead"><h2>Let's Connect</h2><p>Replace the placeholders below with your real profiles before publishing.</p></div><div class="grid"><div class="card"><h3>GitHub</h3><p>Your GitHub profile / PLC repositories</p></div><div class="card"><h3>LinkedIn</h3><p>Your professional profile</p></div><div class="card"><h3>Email</h3><p>Your professional email address</p></div></div></section>
-</main><footer>© 2026 Kishore M · PLC & Industrial Automation Portfolio</footer></div></body></html>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div>
+
+    <div class="eyebrow">
+      PLC • Industrial Automation • ECE
+    </div>
+
+    <h1>
+      Building my career in
+      <span>Industrial Automation.</span>
+    </h1>
+
+    <p>
+      BE ECE graduate focused on PLC programming, machine automation,
+      industrial sensors, motor control and practical troubleshooting.
+      I build and test automation projects to strengthen real-world skills.
+    </p>
+
+    <div class="buttons">
+
+      <a class="btn primary" href="#projects">
+        View Projects
+      </a>
+
+      <!-- VIEW RESUME -->
+      <a class="btn"
+         href="resume/KISHORE_M_.pdf"
+         target="_blank">
+        View Resume
+      </a>
+
+      <!-- DOWNLOAD RESUME -->
+      <a class="btn"
+         href="resume/KISHORE_M_.pdf"
+         download>
+        Download Resume
+      </a>
+
+      <a class="btn" href="#contact">
+        Contact Me
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- PROFILE TERMINAL -->
+
+  <div class="panel terminal">
+
+    <p>
+      <span class="dot"></span>
+      <b>automation_profile</b>
+    </p>
+
+    <p>
+      &gt; role:
+      <b>Engineering Technician</b>
+    </p>
+
+    <p>
+      &gt; focus:
+      <b>PLC / Automation</b>
+    </p>
+
+    <p>
+      &gt; platform:
+      <b>CODESYS V3.5</b>
+    </p>
+
+    <p>
+      &gt; language:
+      <b>Ladder Diagram</b>
+    </p>
+
+    <p>
+      &gt; simulation:
+      <b>Control Win V3</b>
+    </p>
+
+    <p>
+      &gt; status:
+      <b>building portfolio...</b>
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+  <div class="sectionhead">
+
+    <h2>About Me</h2>
+
+    <p>
+      A practical portfolio built around skills I can demonstrate,
+      not just list.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <p>
+      I am an ECE graduate developing my career in PLC and industrial
+      automation. My learning focus includes PLC logic, HMI/SCADA
+      concepts, sensors, motors, feedback monitoring, fault handling
+      and machine automation. I use simulation projects to practice
+      structured control logic and document what I build.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+  <div class="sectionhead">
+
+    <h2>Technical Skills</h2>
+
+    <p>
+      Core areas I am developing through industrial exposure
+      and hands-on projects.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>PLC & Control</h3>
+
+      <span class="tag">Ladder Diagram</span>
+      <span class="tag">CODESYS</span>
+      <span class="tag">Interlocks</span>
+      <span class="tag">Timers</span>
+      <span class="tag">Fault Latching</span>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Industrial</h3>
+
+      <span class="tag">Sensors</span>
+      <span class="tag">Motors</span>
+      <span class="tag">Feedback</span>
+      <span class="tag">Troubleshooting</span>
+      <span class="tag">Machine Automation</span>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Supporting Skills</h3>
+
+      <span class="tag">HMI / SCADA Concepts</span>
+      <span class="tag">Electrical Basics</span>
+      <span class="tag">Industrial Instrumentation</span>
+      <span class="tag">GitHub</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+  <div class="sectionhead">
+
+    <h2>Projects</h2>
+
+    <p>
+      Hands-on PLC projects tested in simulation.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+
+    <!-- PROJECT 1 -->
+
+    <div class="card project">
+
+      <div>
+
+        <span class="tag">
+          Project 01
+        </span>
+
+        <h3>
+          Motor Control & Fault Monitoring
+        </h3>
+
+        <p>
+          Start/stop control with seal-in logic, overload permissive,
+          motor feedback, startup failure detection, fault generation,
+          latching, reset and restart interlock.
+        </p>
+
+      </div>
+
+
+      <div class="bottom">
+
+        <a
+          href="https://github.com/Kishoresai18/PLC-Motor-Control-Fault-Monitoring"
+          target="_blank">
+
+          View Project on GitHub →
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROJECT 2 -->
+
+    <div class="card project">
+
+      <div>
+
+        <span class="tag">
+          Project 02 • In Progress
+        </span>
+
+        <h3>
+          Pump Control System
+        </h3>
+
+        <p>
+          Developing automatic/manual pump control with start/stop,
+          low- and high-level feedback, pump feedback, fault detection
+          and fault reset.
+        </p>
+
+      </div>
+
+
+      <div class="bottom">
+
+        <a href="#contact">
+          Project details coming soon →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- FUTURE PROJECTS -->
+
+    <div class="card project">
+
+      <div>
+
+        <span class="tag">
+          Next
+        </span>
+
+        <h3>
+          More Automation Projects
+        </h3>
+
+        <p>
+          Future projects will expand into HMI, alarms, sequencing,
+          sensors, drives and machine-control concepts.
+        </p>
+
+      </div>
+
+
+      <div class="bottom">
+
+        <a href="#contact">
+          Coming soon →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- EXPERIENCE -->
+
+<section id="experience">
+
+  <div class="sectionhead">
+
+    <h2>
+      Experience & Education
+    </h2>
+
+    <p>
+      Concise background.
+    </p>
+
+  </div>
+
+
+  <div class="timeline">
+
+
+    <div class="item">
+
+      <h3>
+        Technician – Engineering / Automation
+      </h3>
+
+      <p>
+        Industrial manufacturing environment · Current
+      </p>
+
+      <p>
+        Exposure to machine availability, production support,
+        automation-related troubleshooting and practical equipment issues.
+      </p>
+
+    </div>
+
+
+    <div class="item">
+
+      <h3>
+        Instrumentation Trainee
+      </h3>
+
+      <p>
+        MRF · Previous
+      </p>
+
+      <p>
+        Exposure to pressure instrument calibration, weighing
+        instrumentation, SCADA installation support and industrial
+        instrumentation activities.
+      </p>
+
+    </div>
+
+
+    <div class="item">
+
+      <h3>
+        BE Electronics & Communication Engineering
+      </h3>
+
+      <p>
+        Jeppiaar Institute of Technology, Chennai · 2021–2025
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section id="achievements">
+
+  <div class="sectionhead">
+
+    <h2>
+      Achievements
+    </h2>
+
+    <p>
+      Recognition from practical improvement activities.
+    </p>
+
+  </div>
+
+
+  <div class="card achievement">
+
+    <span class="tag">
+      Company-Level Recognition
+    </span>
+
+    <h3>
+      2nd Place — Kaizen Competition
+    </h3>
+
+    <p>
+      Recognized with 2nd place in a company-level Kaizen competition
+      for a continuous improvement initiative.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+  <div class="sectionhead">
+
+    <h2>
+      Let's Connect
+    </h2>
+
+    <p>
+      Explore my professional profiles and automation projects.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+
+    <!-- GITHUB -->
+
+    <div class="card">
+
+      <h3>
+        GitHub
+      </h3>
+
+      <p>
+        PLC projects and technical work.
+      </p>
+
+      <br>
+
+      <a
+        class="contact-link"
+        href="https://github.com/Kishoresai18"
+        target="_blank">
+
+        View GitHub Profile →
+
+      </a>
+
+    </div>
+
+
+    <!-- LINKEDIN -->
+
+    <div class="card">
+
+      <h3>
+        LinkedIn
+      </h3>
+
+      <p>
+        Professional profile and career information.
+      </p>
+
+      <br>
+
+      <a
+        class="contact-link"
+        href="https://www.linkedin.com/in/contactkishoreharish/"
+        target="_blank">
+
+        View LinkedIn Profile →
+
+      </a>
+
+    </div>
+
+
+    <!-- RESUME -->
+
+    <div class="card">
+
+      <h3>
+        Resume
+      </h3>
+
+      <p>
+        View or download my latest resume.
+      </p>
+
+      <br>
+
+      <a
+        class="contact-link"
+        href="resume/KISHORE_M_.pdf"
+        target="_blank">
+
+        View Resume →
+
+      </a>
+
+      <br><br>
+
+      <a
+        class="contact-link"
+        href="resume/KISHORE_M_.pdf"
+        download>
+
+        Download Resume ↓
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  © 2026 Kishore M · PLC & Industrial Automation Portfolio
+
+</footer>
+
+</div>
+
+</body>
+</html>
